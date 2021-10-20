@@ -1,14 +1,34 @@
 const express = require("express");
-const morgon = require("morgan")
+const morgon = require("morgan");
+const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const authRoutes = require("./routes/authRoutes");
+const keys = require("./config/keys");
+require("./services/passport");
 
-const app = express()
+mongoose
+  .connect(keys.mongodbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((result) => {
+    console.log("connected to DB");
+  })
+  .catch((err) => console.log(err));
 
-// * Middlewares
-app.use(morgon("tiny"))
+const app = express();
+app.use(morgon("tiny"));
+app.use(
+  cookieSession({
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/',(req,res) =>{
-     res.json({message : "Hi there"});
-})
+app.use(authRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("App is running on",PORT));
+app.listen(PORT, () => console.log("App is running on", PORT));
