@@ -2,6 +2,7 @@ const express = require("express");
 const morgon = require("morgan");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+const cors = require("cors");
 const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
 const keys = require("./config/keys");
@@ -23,6 +24,11 @@ app.use(
   cookieSession({
     maxAge: 3 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey],
+  })
+);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
   })
 );
 app.use(passport.initialize());
