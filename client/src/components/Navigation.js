@@ -3,6 +3,8 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "../store/actions/authActions";
+import Payments from "./Payments";
+import { Button } from "react-bootstrap";
 
 function Navigation() {
   const { user } = useSelector((state) => state.auth);
@@ -44,6 +46,26 @@ function Navigation() {
               >
                 Create Survey
               </NavLink>
+              <div
+                style={{
+                  margin: "0 1rem",
+                  textDecoration: "none",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                <Payments />
+              </div>
+              <div
+                style={{
+                  margin: "0 1rem",
+                  textDecoration: "none",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                Credits: {user.credits}
+              </div>
               <div
                 onClick={logOut}
                 style={{

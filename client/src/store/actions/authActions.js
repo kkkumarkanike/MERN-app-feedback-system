@@ -20,3 +20,14 @@ export const logout = () => {
     }
   };
 };
+
+export const handleToken = (token) => {
+  return async (dispatch) => {
+    console.log(token);
+    const result = await axios.post("/api/stripe", token);
+    console.log("this is data", result.data);
+    if (result.data) {
+      dispatch({ type: actionTypes.GET_USER, user: result.data });
+    }
+  };
+};

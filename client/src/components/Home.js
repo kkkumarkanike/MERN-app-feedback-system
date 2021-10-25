@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 function Home() {
   const { user } = useSelector((state) => state.auth);
   return (
-    <div>{user ? <h1>Welcome back {user._id} !!</h1> : <h1>Home</h1>}</div>
+    <div style={{ textAlign: "center", marginTop: "1rem" }}>
+      <h1>Feedback System !</h1>
+      <p>Collect feedback from your Users</p>
+    </div>
   );
 }
 

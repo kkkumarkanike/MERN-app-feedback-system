@@ -24,7 +24,7 @@ function App() {
 
         {user ? (
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact component={Surveys} />
             <Route path="/surveys" exact component={Surveys} />
             <Route path="/surveys/new" exact component={NewSurvey} />
             <Route path="/404" exact component={Pnf} />
@@ -35,7 +35,6 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/login" exact component={Login} />
-            <Redirect to="/" />
           </Switch>
         )}
       </div>
